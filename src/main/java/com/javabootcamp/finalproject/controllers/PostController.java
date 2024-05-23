@@ -22,11 +22,6 @@ public class PostController {
     CommentRepository commentRepo;
 
 
-    @GetMapping("/")
-    public String home() {
-        return "hi";
-    }
-
     @GetMapping("posts")
     public ResponseEntity<Object> getAllPublishedPosts() {
         try {
@@ -122,11 +117,4 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
-
-    @RequestMapping("/**")
-    public ResponseEntity<Object> nonExistentMapping(){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The requested path does not exist");
-    }
-
-
 }
