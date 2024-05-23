@@ -22,6 +22,11 @@ public class PostController {
     CommentRepository commentRepo;
 
 
+    @GetMapping("/")
+    public String home() {
+        return "hi";
+    }
+
     @GetMapping("posts")
     public ResponseEntity<Object> getAllPublishedPosts() {
         try {
