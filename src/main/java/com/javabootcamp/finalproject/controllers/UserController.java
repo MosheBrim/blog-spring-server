@@ -1,5 +1,6 @@
 package com.javabootcamp.finalproject.controllers;
 
+import com.javabootcamp.finalproject.models.Post;
 import com.javabootcamp.finalproject.models.User;
 import com.javabootcamp.finalproject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,15 @@ public class UserController {
     UserRepository userRepo;
 
     @GetMapping("users/single/{user}")
-    public ResponseEntity<Object> getUser(@PathVariable String user) {
+    public ResponseEntity<Object> getUser(@PathVariable String user, @RequestParam String password) {
         try {
             if (userRepo.findById(user).isPresent()) {
-                return ResponseEntity.status(HttpStatus.OK).body(userRepo.findById(user).get());
+                User singleUser = userRepo.findById(user).get();
+                System.out.println(singleUser.getPassword());
+                if (singleUser.getPassword().equals(password)) {
+                    return ResponseEntity.status(HttpStatus.OK).body(userRepo.findById(user).get());
+                }
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have the permissions to perform this action");
             }
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have the permissions to perform this action");
         } catch (Exception e) {

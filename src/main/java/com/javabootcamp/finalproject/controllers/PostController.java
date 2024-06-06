@@ -75,6 +75,7 @@ public class PostController {
                 originalPost.setDescription(updatedPost.getDescription());
                 originalPost.setData(updatedPost.getData());
                 originalPost.setPublished(updatedPost.isPublished());
+                originalPost.setImage(updatedPost.getImage());
                 return ResponseEntity.status(HttpStatus.OK).body(postRepo.save(originalPost));
             }
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have the permissions to perform this action");
@@ -88,7 +89,6 @@ public class PostController {
     @GetMapping("admin/posts/publish/{user}/{id}")
     public ResponseEntity<Object> postStatusUpdate(@PathVariable String user, @PathVariable int id){
         try {
-            System.out.println("enter");
             if (userRepo.findById(user).isPresent()) {
                 Post post = postRepo.findById(id).get();
                 post.setPublished(!post.isPublished());
