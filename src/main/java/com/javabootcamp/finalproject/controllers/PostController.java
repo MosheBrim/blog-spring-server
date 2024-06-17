@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://blog-react-client-green.vercel.app")
 public class PostController {
 
     @Autowired
