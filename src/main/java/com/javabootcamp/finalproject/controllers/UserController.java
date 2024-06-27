@@ -1,6 +1,5 @@
 package com.javabootcamp.finalproject.controllers;
 
-import com.javabootcamp.finalproject.models.Post;
 import com.javabootcamp.finalproject.models.User;
 import com.javabootcamp.finalproject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ public class UserController {
         try {
             if (userRepo.findById(user).isPresent()) {
                 User singleUser = userRepo.findById(user).get();
-                System.out.println(singleUser.getPassword());
                 if (singleUser.getPassword().equals(password)) {
                     return ResponseEntity.status(HttpStatus.OK).body(userRepo.findById(user).get());
                 }
